@@ -1,0 +1,26 @@
+{
+  "name": "desafiotangerino",
+  "version": "1.0.0",
+  "description": "Este projeto tem como objetivo realizar a automação do cadastro no site Kanui para, para pessoas PF e PJ.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress:open": "cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Allain-Prost/DesafioTangerino.git"
+  },
+  "keywords": [
+    "Cadastro"
+  ],
+  "author": "Allain Prost",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Allain-Prost/DesafioTangerino/issues"
+  },
+  "homepage": "https://github.com/Allain-Prost/DesafioTangerino#readme",
+  "dependencies": {
+    "cypress": "^11.0.0"
+  }
+}
