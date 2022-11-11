@@ -1,0 +1,14 @@
+{
+    "primeiroNome": "Teste",
+    "sobreNome": "Tangerino",
+    "email": "teste@tangerino.com.br",
+    "sexo": "male",
+    "documento": "572.552.080-37",
+    "nascimento": {
+        "dia": "20",
+        "mes": "08",
+        "ano": "1990"
+    },
+    "senha": "tangerino123",
+    "confirmandoSenha": "tangerino123"
+}

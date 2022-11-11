@@ -7,7 +7,7 @@ const locators = {
 
     form_Cadastro: {
         primeiroNome: '#RegistrationForm_first_name',
-        ultimoNome: '#RegistrationForm_last_name',
+        sobreNome: '#RegistrationForm_last_name',
         email: '#RegistrationForm_email',
         genero: '#RegistrationForm_gender',
         documento: '#RegistrationForm_tax_identification',
@@ -21,7 +21,9 @@ const locators = {
         senha: '#form-customer-account-password',
         confimacaoSenha: '#RegistrationForm_password2',
         btn_criarConta: '#customer-account-create'
-    }
+    },
+
+    mensagemCampoObrigatorio: '.parsley-required'
 
 }
 
