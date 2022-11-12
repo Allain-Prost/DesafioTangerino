@@ -61,7 +61,6 @@ Cypress.Commands.add('CriarConta', () => {
   cy.get(loc.form_Cadastro.btn_criarConta).click()
 })
 
-
 Cypress.Commands.add('PreencherDataNascimento', (dia, mes, ano) => {
   //data de nascimento 
   cy.get(loc.form_Cadastro.dataDeNascimento.dia).select(dia)

@@ -23,7 +23,9 @@ const locators = {
         btn_criarConta: '#customer-account-create'
     },
 
-    mensagemCampoObrigatorio: '.parsley-required'
+    mensagemCampoObrigatorio: '.parsley-required',
+    mensagemErro: tipo => `//label[@for='RegistrationForm_${tipo}']/../ul/li[@class="parsley-required"]`
+
 
 }
 
