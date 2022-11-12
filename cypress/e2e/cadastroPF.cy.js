@@ -19,7 +19,7 @@ describe('CadastroPF', () => {
             
             cy.CriarConta()
 
-            cy.VerificarCampoObrigatorio()
+            cy.VerificarCampoObrigatorio('first_name')
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
@@ -35,8 +35,8 @@ describe('CadastroPF', () => {
             cy.PreencherSenha(dadosPF.senha, dadosPF.confirmandoSenha)
 
             cy.CriarConta()
-            
-            cy.VerificarCampoObrigatorio()
+
+            cy.VerificarCampoObrigatorio('last_name')
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
@@ -53,7 +53,7 @@ describe('CadastroPF', () => {
             
             cy.CriarConta()
 
-            cy.VerificarCampoObrigatorio()
+            cy.VerificarCampoObrigatorio('email')
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 

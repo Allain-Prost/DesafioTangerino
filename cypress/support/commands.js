@@ -77,13 +77,13 @@ Cypress.Commands.add('PreencherSenha', (senha, confimacaoSenha) => {
   cy.get(loc.form_Cadastro.confimacaoSenha).type(confimacaoSenha)
 })
 
-Cypress.Commands.add('VerificarCampoObrigatorio', () => {
+Cypress.Commands.add('VerificarCampoObrigatorio', (campo) => {
     //Primeira assertiva para garantir que a mensagem de erro está sendo exibida
     /* A mensagem de obrigatoriedade dos campos é genérica, por tanto foi utilizado xpath
     para poder aninhar os elementos DOM. Primeiro esse seletor busca um label que se 
     refere ao email e por fim a um elemento de uma lista que exibe a mensagem de 
     obrigatoriedade: "Campo obrigatório". */  
-    cy.xpath(loc.mensagemErro('first_name')).should('contain', 'Campo obrigatório')
+    cy.xpath(loc.mensagemErro(campo)).should('contain', 'Campo obrigatório')
 })
 
 Cypress.Commands.add('VerificarSeUsuarioEstaNaTelaDeCadastro', () => {
