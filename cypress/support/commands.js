@@ -37,6 +37,10 @@ Cypress.Commands.add('AcessarTelaDeCadastro', () => {
     .click();
 })
 
+Cypress.Commands.add('PreencherTipoPessoa', (tipo) => {
+  cy.get(loc.tipoPessoa(tipo)).click()
+})
+
 Cypress.Commands.add('PreencherNome', (nome) => {
   cy.get(loc.form_Cadastro.primeiroNome).type(nome)
 })
@@ -71,4 +75,18 @@ Cypress.Commands.add('PreencherDataNascimento', (dia, mes, ano) => {
 Cypress.Commands.add('PreencherSenha', (senha, confimacaoSenha) => {
   cy.get(loc.form_Cadastro.senha).type(senha)
   cy.get(loc.form_Cadastro.confimacaoSenha).type(confimacaoSenha)
+})
+
+Cypress.Commands.add('VerificarCampoObrigatorio', () => {
+    //Primeira assertiva para garantir que a mensagem de erro está sendo exibida
+    /* A mensagem de obrigatoriedade dos campos é genérica, por tanto foi utilizado xpath
+    para poder aninhar os elementos DOM. Primeiro esse seletor busca um label que se 
+    refere ao email e por fim a um elemento de uma lista que exibe a mensagem de 
+    obrigatoriedade: "Campo obrigatório". */  
+    cy.xpath(loc.mensagemErro('first_name')).should('contain', 'Campo obrigatório')
+})
+
+Cypress.Commands.add('VerificarSeUsuarioEstaNaTelaDeCadastro', () => {
+    //Segunda assertiva para garantir que o usuário permanece na tela de cadastro
+    cy.get(loc.form_Cadastro.btn_criarConta).should('contain', 'Criar Conta')
 })

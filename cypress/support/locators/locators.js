@@ -4,6 +4,7 @@ const locators = {
 
     btn_login: '.header-login-link',
     btn_formLoginCadastro: '.account-form-title',
+    tipoPessoa: tipo => `#RegistrationForm_customer_personality_${tipo}`,
 
     form_Cadastro: {
         primeiroNome: '#RegistrationForm_first_name',
