@@ -25,56 +25,59 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import loc from '../support/locators/locators'
 
-Cypress.Commands.add('AcessarTelaDeCadastro', () => {    
-  cy.visit(loc.BASE_URL);
-  cy.get(loc.btn_login).click()
+Cypress.Commands.add('AcessarTelaDeCadastro', () => {
+    cy.visit(loc.BASE_URL);
+    cy.get(loc.btn_login).click()
 
-  cy.intercept('GET','https://securepubads.g.doubleclick.net/static/topics/topics_frame.html').as('esperaTelaLogin')
-  cy.wait('@esperaTelaLogin')
+    cy.intercept('GET', 'https://securepubads.g.doubleclick.net/static/topics/topics_frame.html').as('esperaTelaLogin')
+    cy.wait('@esperaTelaLogin')
 
-  cy.get(loc.btn_formLoginCadastro)
-    .contains('Quero me cadastrar')
-    .click();
+    cy.get(loc.btn_formLoginCadastro)
+        .contains('Quero me cadastrar')
+        .click();
 })
 
 Cypress.Commands.add('PreencherTipoPessoa', (tipo) => {
-  cy.get(loc.tipoPessoa(tipo)).click()
+    cy.get(loc.tipoPessoa(tipo)).click()
 })
 
 Cypress.Commands.add('PreencherNome', (nome) => {
-  cy.get(loc.form_Cadastro.primeiroNome).type(nome)
+    cy.get(loc.form_Cadastro.primeiroNome).type(nome)
 })
 
 Cypress.Commands.add('PreencherSobreNome', (sobreNome) => {
-  cy.get(loc.form_Cadastro.sobreNome).type(sobreNome)
+    cy.get(loc.form_Cadastro.sobreNome).type(sobreNome)
 })
 
 Cypress.Commands.add('PreencherEmail', (email) => {
-  cy.get(loc.form_Cadastro.email).type(email)
+    cy.get(loc.form_Cadastro.email).type(email)
 })
 
 Cypress.Commands.add('PreencherSexo', (sexo) => {
-  cy.get(loc.form_Cadastro.genero).select(sexo)
+    cy.get(loc.form_Cadastro.genero).select(sexo)
 })
 
 Cypress.Commands.add('PreencherDocumento', (documento) => {
-  cy.get(loc.form_Cadastro.documento).type(documento)
+    cy.get(loc.form_Cadastro.documento).type(documento)
 })
 
 Cypress.Commands.add('CriarConta', () => {
-  cy.get(loc.form_Cadastro.btn_criarConta).click()
+    cy.get(loc.form_Cadastro.btn_criarConta).click()
 })
 
 Cypress.Commands.add('PreencherDataNascimento', (dia, mes, ano) => {
-  //data de nascimento 
-  cy.get(loc.form_Cadastro.dataDeNascimento.dia).select(dia)
-  cy.get(loc.form_Cadastro.dataDeNascimento.mes).select(mes)
-  cy.get(loc.form_Cadastro.dataDeNascimento.ano).select(ano)
+    //data de nascimento 
+    cy.get(loc.form_Cadastro.dataDeNascimento.dia).select(dia)
+    cy.get(loc.form_Cadastro.dataDeNascimento.mes).select(mes)
+    cy.get(loc.form_Cadastro.dataDeNascimento.ano).select(ano)
 })
 
-Cypress.Commands.add('PreencherSenha', (senha, confimacaoSenha) => {
-  cy.get(loc.form_Cadastro.senha).type(senha)
-  cy.get(loc.form_Cadastro.confimacaoSenha).type(confimacaoSenha)
+Cypress.Commands.add('PreencherSenha', (senha) => {
+    cy.get(loc.form_Cadastro.senha).type(senha)
+})
+
+Cypress.Commands.add('ConfirmarSenha', (confimacaoSenha) => {
+    cy.get(loc.form_Cadastro.confimacaoSenha).type(confimacaoSenha)
 })
 
 Cypress.Commands.add('VerificarCampoObrigatorio', (campo) => {
@@ -82,7 +85,7 @@ Cypress.Commands.add('VerificarCampoObrigatorio', (campo) => {
     /* A mensagem de obrigatoriedade dos campos é genérica, por tanto foi utilizado xpath
     para poder aninhar os elementos DOM. Primeiro esse seletor busca um label que se 
     refere ao email e por fim a um elemento de uma lista que exibe a mensagem de 
-    obrigatoriedade: "Campo obrigatório". */  
+    obrigatoriedade: "Campo obrigatório". */
     cy.xpath(loc.mensagemErro(campo)).should('contain', 'Campo obrigatório')
 })
 

@@ -25,8 +25,8 @@ const locators = {
     },
 
     mensagemCampoObrigatorio: '.parsley-required',
-    mensagemErro: tipo => `//label[@for='RegistrationForm_${tipo}']/../ul/li[@class="parsley-required"]`
-
+    mensagemErro: tipo => `//label[@for='RegistrationForm_${tipo}']/../ul/li[@class="parsley-required"]`,
+    mensagemErroNascimento: `//select[@class="selectbox day is-invalid parsley-error"]`
 
 }
 
