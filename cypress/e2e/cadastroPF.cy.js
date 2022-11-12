@@ -2,6 +2,7 @@
 
 import loc from "../support/locators/locators"
 import dadosPF from "../fixtures/dadosPF.json"
+import dadosPFInv from "../fixtures/dadosPFInv.json"
 
 describe('CadastroPF', () => {
     context('Deve verificar a obrigatoriedade dos campos para PF', () => {
@@ -152,7 +153,43 @@ describe('CadastroPF', () => {
     })
 
     context('Deve verificar valores inválidos', () => {
-    
+        it('Deve verificar se o formato do email é valido', () => {
+            cy.AcessarTelaDeCadastro()
+
+            cy.PreencherTipoPessoa(dadosPF.tipoPessoaPF)
+            cy.PreencherNome(dadosPF.primeiroNome)
+            cy.PreencherSobreNome(dadosPF.sobreNome)
+            cy.PreencherEmail(dadosPFInv.emailInvalido)
+            cy.PreencherSexo(dadosPF.sexo)
+            cy.PreencherDocumento(dadosPF.documento)
+            cy.PreencherDataNascimento(dadosPF.nascimento.dia, dadosPF.nascimento.mes, dadosPF.nascimento.ano)
+            cy.PreencherSenha(dadosPF.senha)
+            cy.ConfirmarSenha(dadosPF.confirmandoSenha)
+            
+            cy.CriarConta()
+
+            cy.xpath(loc.mensagemErroEmailInv).should('contain', 'E-mail inválido. Verifique se digitou corretamente.')
+            cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
+        })
+
+        it('Deve verificar se o documento é valido', () => {
+            cy.AcessarTelaDeCadastro()
+
+            cy.PreencherTipoPessoa(dadosPF.tipoPessoaPF)
+            cy.PreencherNome(dadosPF.primeiroNome)
+            cy.PreencherSobreNome(dadosPF.sobreNome)
+            cy.PreencherEmail(dadosPF.email)
+            cy.PreencherSexo(dadosPF.sexo)
+            cy.PreencherDocumento(dadosPFInv.documentoInvalido)
+            cy.PreencherDataNascimento(dadosPF.nascimento.dia, dadosPF.nascimento.mes, dadosPF.nascimento.ano)
+            cy.PreencherSenha(dadosPF.senha)
+            cy.ConfirmarSenha(dadosPF.confirmandoSenha)
+            
+            cy.CriarConta()
+
+            cy.xpath(loc.mensagemDocumentoInv).should('contain', 'CPF/CNPJ inválido')
+            cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
+        })
     })
 
 })
