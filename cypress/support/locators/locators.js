@@ -28,7 +28,10 @@ const locators = {
     mensagemErro: tipo => `//label[@for='RegistrationForm_${tipo}']/../ul/li[@class="parsley-required"]`,
     mensagemErroNascimento: `//select[@class="selectbox day is-invalid parsley-error"]`,
     mensagemErroEmailInv: `//label[@for='RegistrationForm_email']/../ul/li[@class="parsley-type"]`,
-    mensagemDocumentoInv: `//label[@for='RegistrationForm_tax_identification']/../div[@class="errorMessage"]`
+    mensagemDocumentoInv: `//label[@for='RegistrationForm_tax_identification']/../div[@class="errorMessage"]`,
+    mensagemEmailCpfRepetido: '.message-description',
+
+    olaPessoa: '.header-login-welcome'   
 
 }
 

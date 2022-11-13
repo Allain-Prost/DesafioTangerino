@@ -1,7 +1,7 @@
 {
   "name": "desafiotangerino",
   "version": "1.0.0",
-  "description": "Este projeto tem como objetivo realizar a automação do cadastro no site Kanui para, para pessoas PF e PJ.",
+  "description": "Este projeto tem como objetivo realizar a automação do cadastro no site Kanui para pessoas PF e PJ.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

@@ -93,3 +93,7 @@ Cypress.Commands.add('VerificarSeUsuarioEstaNaTelaDeCadastro', () => {
     //Segunda assertiva para garantir que o usuário permanece na tela de cadastro
     cy.get(loc.form_Cadastro.btn_criarConta).should('contain', 'Criar Conta')
 })
+
+Cypress.Commands.add('VerificarCadastroComSucesso', (nome) => {
+    cy.get(loc.olaPessoa).should('contain', `${nome}`)
+})

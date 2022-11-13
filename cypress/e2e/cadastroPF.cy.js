@@ -6,7 +6,27 @@ import dadosPFInv from "../fixtures/dadosPFInv.json"
 import PF from "../support/geradorDePessoa/geradorDeCPF"
 
 describe('CadastroPF', () => {
-    context('Deve verificar a obrigatoriedade dos campos para PF', () => {
+    
+    context('Fluxo básico', () => {
+        it('Deve realizar o cadastro com sucesso', () => {
+            cy.AcessarTelaDeCadastro()
+            
+            cy.PreencherTipoPessoa(PF.tipoPessoaPF)
+            cy.PreencherNome(PF.primeiroNome)
+            cy.PreencherSobreNome(PF.sobreNome)
+            cy.PreencherEmail(PF.email)
+            cy.PreencherSexo(PF.sexo)
+            cy.PreencherDocumento(PF.cpf)
+            cy.PreencherDataNascimento(PF.nascimentoDia, PF.nascimentoMes, PF.nascimentoAno)
+            cy.PreencherSenha(PF.senha)
+            cy.ConfirmarSenha(PF.confirmandoSenha)
+
+            cy.CriarConta()
+            cy.VerificarCadastroComSucesso(PF.primeiroNome)
+        })
+    })
+
+    context('Fluxo exceção', () => {
 
         it('Deve verificar se o primeiro nome é obrigatório', () => {
             cy.AcessarTelaDeCadastro()
@@ -151,9 +171,6 @@ describe('CadastroPF', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-    })
-
-    context('Deve verificar valores inválidos', () => {
         it('Deve verificar se o formato do email é valido', () => {
             cy.AcessarTelaDeCadastro()
 
@@ -170,6 +187,25 @@ describe('CadastroPF', () => {
             cy.CriarConta()
 
             cy.xpath(loc.mensagemErroEmailInv).should('contain', 'E-mail inválido. Verifique se digitou corretamente.')
+            cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
+        })
+
+        it('Deve verificar email repetido', () => {
+            cy.AcessarTelaDeCadastro()
+
+            cy.PreencherTipoPessoa(dadosPF.tipoPessoaPF)
+            cy.PreencherNome(dadosPF.primeiroNome)
+            cy.PreencherSobreNome(dadosPF.sobreNome)
+            cy.PreencherEmail('Analeia.Oliveira94@live.com')
+            cy.PreencherSexo(dadosPF.sexo)
+            cy.PreencherDocumento(dadosPF.documento)
+            cy.PreencherDataNascimento(dadosPF.nascimento.dia, dadosPF.nascimento.mes, dadosPF.nascimento.ano)
+            cy.PreencherSenha(dadosPF.senha)
+            cy.ConfirmarSenha(dadosPF.confirmandoSenha)
+            
+            cy.CriarConta()
+
+            cy.get(loc.mensagemEmailCpfRepetido).should('contain', 'E-mail ou CPF já cadastrado(s).')
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
@@ -191,28 +227,25 @@ describe('CadastroPF', () => {
             cy.xpath(loc.mensagemDocumentoInv).should('contain', 'CPF/CNPJ inválido')
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
-    })
 
-    context('Deve verificar se o cadastro foi feito corretamente', () => {
-        it.only('Deve realizar o cadastro com sucesso', () => {
+        it('Deve verificar documento repetido', () => {
             cy.AcessarTelaDeCadastro()
+
+            cy.PreencherTipoPessoa(dadosPF.tipoPessoaPF)
+            cy.PreencherNome(dadosPF.primeiroNome)
+            cy.PreencherSobreNome(dadosPF.sobreNome)
+            cy.PreencherEmail(dadosPF.email)
+            cy.PreencherSexo(dadosPF.sexo)
+            cy.PreencherDocumento('111.111.111-11')
+            cy.PreencherDataNascimento(dadosPF.nascimento.dia, dadosPF.nascimento.mes, dadosPF.nascimento.ano)
+            cy.PreencherSenha(dadosPF.senha)
+            cy.ConfirmarSenha(dadosPF.confirmandoSenha)
             
-            cy.PreencherTipoPessoa(PF.tipoPessoaPF)
-            cy.PreencherNome(PF.primeiroNome)
-            cy.PreencherSobreNome(PF.sobreNome)
-            cy.PreencherEmail(PF.email)
-            cy.PreencherSexo(PF.sexo)
-            cy.PreencherDocumento(PF.cpf)
-            cy.PreencherDataNascimento(PF.nascimentoDia, PF.nascimentoMes, PF.nascimentoAno)
-            cy.PreencherSenha(PF.senha)
-            cy.ConfirmarSenha(PF.confirmandoSenha)
-
             cy.CriarConta()
-            cy.get('.header-login-welcome').should('contain', `${PF.primeiroNome}`)
 
-
-
+            cy.get(loc.mensagemEmailCpfRepetido).should('contain', 'E-mail ou CPF já cadastrado(s).')
+            cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
-    })
 
+    })
 })
