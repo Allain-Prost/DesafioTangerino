@@ -3,6 +3,7 @@
 import loc from "../support/locators/locators"
 import dadosPF from "../fixtures/dadosPF.json"
 import dadosPFInv from "../fixtures/dadosPFInv.json"
+import PF from "../support/geradorDePessoa/geradorDeCPF"
 
 describe('CadastroPF', () => {
     context('Deve verificar a obrigatoriedade dos campos para PF', () => {
@@ -189,6 +190,28 @@ describe('CadastroPF', () => {
 
             cy.xpath(loc.mensagemDocumentoInv).should('contain', 'CPF/CNPJ inválido')
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
+        })
+    })
+
+    context('Deve verificar se o cadastro foi feito corretamente', () => {
+        it.only('Deve realizar o cadastro com sucesso', () => {
+            cy.AcessarTelaDeCadastro()
+            
+            cy.PreencherTipoPessoa(PF.tipoPessoaPF)
+            cy.PreencherNome(PF.primeiroNome)
+            cy.PreencherSobreNome(PF.sobreNome)
+            cy.PreencherEmail(PF.email)
+            cy.PreencherSexo(PF.sexo)
+            cy.PreencherDocumento(PF.cpf)
+            cy.PreencherDataNascimento(PF.nascimentoDia, PF.nascimentoMes, PF.nascimentoAno)
+            cy.PreencherSenha(PF.senha)
+            cy.ConfirmarSenha(PF.confirmandoSenha)
+
+            cy.CriarConta()
+            cy.get('.header-login-welcome').should('contain', `${PF.primeiroNome}`)
+
+
+
         })
     })
 

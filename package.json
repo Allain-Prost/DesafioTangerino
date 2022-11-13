@@ -21,7 +21,9 @@
   },
   "homepage": "https://github.com/Allain-Prost/DesafioTangerino#readme",
   "dependencies": {
-    "cypress": "^11.0.0"
+    "@faker-js/faker": "^7.6.0",
+    "cypress": "^11.0.0",
+    "faker-br": "^0.4.1"
   },
   "devDependencies": {
     "@cypress/xpath": "^2.0.3"
