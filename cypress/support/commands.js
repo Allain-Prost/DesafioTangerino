@@ -29,10 +29,12 @@ Cypress.Commands.add('AcessarTelaDeCadastro', () => {
     cy.visit(loc.BASE_URL);
     cy.get(loc.btn_login).click()
 
-    cy.intercept('GET', 'https://securepubads.g.doubleclick.net/static/topics/topics_frame.html').as('esperaTelaLogin')
-    cy.wait('@esperaTelaLogin')
+    /* cy.intercept('GET', 'https://securepubads.g.doubleclick.net/static/topics/topics_frame.html').as('esperaTelaLogin')
+    cy.wait('@esperaTelaLogin').then(($res) => {
+        expect($res.response.statusCode).to.be.equal(200)
+    }) */ 
 
-    cy.get(loc.btn_formLoginCadastro)
+    cy.get(loc.btn_formLoginCadastro, { timeout: 10000 })
         .contains('Quero me cadastrar')
         .click();
 })
@@ -62,6 +64,7 @@ Cypress.Commands.add('PreencherDocumento', (documento) => {
 })
 
 Cypress.Commands.add('PreencherInscricaoEst', (insc) => {
+    cy.doubleClickIsento()
     cy.get(loc.form_Cadastro.inscricao).type(insc)
 })
 
@@ -99,12 +102,17 @@ Cypress.Commands.add('VerificarSeUsuarioEstaNaTelaDeCadastro', () => {
 })
 
 Cypress.Commands.add('VerificarCadastroComSucesso', (nome) => {
-    cy.get(loc.olaPessoa).should('contain', `${nome}`)
+    cy.get(loc.olaPessoa, { timeout: 5000 }).should('contain', `${nome}`)
 })
 
 Cypress.Commands.add('MarcarIsento', ()=> {
     cy.get(loc.form_Cadastro.isento).click()
 })
+
+Cypress.Commands.add('doubleClickIsento', ()=> {
+    cy.get(loc.form_Cadastro.isento).dblclick()
+})
+
 
 Cypress.Commands.add('RemoverOfertas', () => {
     cy.get(loc.form_Cadastro.ofertas).click()

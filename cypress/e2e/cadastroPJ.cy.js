@@ -30,7 +30,6 @@ describe('CadastroPJ', () => {
 
         it('Deve realizar o cadastro com a inscrição estadual isento com sucesso', () => {
             
-            
             cy.PreencherTipoPessoa(PJ[1].tipoPessoa)
             cy.PreencherNome(PJ[1].razaoSocial)
             cy.MarcarIsento()
@@ -83,8 +82,8 @@ describe('CadastroPJ', () => {
         it('Deve verificar se a inscrição estadual é obrigatório', () => {
             
             cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
+            cy.doubleClickIsento()
             cy.PreencherNome(dadosPJ.razaoSocial)
-            
             cy.PreencherEmail(dadosPJ.email)
             cy.PreencherDocumento(dadosPJ.cnpj)
             cy.PreencherSenha(dadosPJ.senha)
@@ -97,7 +96,7 @@ describe('CadastroPJ', () => {
         })
 
         it('Deve verificar se o email é obrigatório', () => {
-            
+        
             cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
             cy.PreencherNome(dadosPJ.razaoSocial)
             cy.PreencherInscricaoEst(dadosPJ.inscricaoEstadual)
@@ -179,14 +178,14 @@ describe('CadastroPJ', () => {
             cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
             cy.PreencherNome(dadosPJ.razaoSocial)
             cy.PreencherInscricaoEst(dadosPJ.inscricaoEstadual)
-            cy.PreencherDocumento('84.936.341/1101-63')
+            cy.PreencherDocumento('70.305.272/0001-85')
             cy.PreencherEmail(dadosPJ.email)
             cy.PreencherSenha(dadosPJ.senha)
             cy.ConfirmarSenha(dadosPJ.confirmandoSenha)
             
             cy.CriarConta()
 
-            cy.xpath(loc.mensagemDocumentoInv).should('contain', 'CPF/CNPJ inválido')
+            cy.get(loc.mensagemEmailCpfRepetido).should('contain', 'E-mail ou CNPJ já cadastrado(s).')
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
