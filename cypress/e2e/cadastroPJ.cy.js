@@ -2,14 +2,15 @@
 
 import PJ from "../support/geradorDePessoa/geradorDePJ"
 import dadosPJ from "../fixtures/dadosPJ.json"
+import dadosPJInv from "../fixtures/dadosPJInv.json"
 import loc from "../support/locators/locators"
 
 describe('CadastroPJ', () => {
+    beforeEach(() => {
+        cy.AcessarTelaDeCadastro()
+    })
 
-    context.only('Fluxo básico', () => {
-        beforeEach(() => {
-            cy.AcessarTelaDeCadastro()
-        })
+    context('Fluxo básico', () => {
 
         it('Deve realizar o cadastro com sucesso', () => {
             
@@ -65,7 +66,6 @@ describe('CadastroPJ', () => {
     context('Fluxo de exceção', () => {
 
         it('Deve verificar se razão social é obrigatório', () => {
-            cy.AcessarTelaDeCadastro()
             
             cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
             cy.PreencherInscricaoEst(dadosPJ.inscricaoEstadual)
@@ -81,7 +81,6 @@ describe('CadastroPJ', () => {
         })
 
         it('Deve verificar se a inscrição estadual é obrigatório', () => {
-            cy.AcessarTelaDeCadastro()
             
             cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
             cy.PreencherNome(dadosPJ.razaoSocial)
@@ -98,7 +97,6 @@ describe('CadastroPJ', () => {
         })
 
         it('Deve verificar se o email é obrigatório', () => {
-            cy.AcessarTelaDeCadastro()
             
             cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
             cy.PreencherNome(dadosPJ.razaoSocial)
@@ -113,8 +111,39 @@ describe('CadastroPJ', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
+        it('Deve verificar email repetido', () => {
+            
+            cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
+            cy.PreencherNome(dadosPJ.razaoSocial)
+            cy.PreencherInscricaoEst(dadosPJ.inscricaoEstadual)
+            cy.PreencherEmail('Edwirges.Moreira98@gmail.com')
+            cy.PreencherDocumento(dadosPJ.cnpj)
+            cy.PreencherSenha(dadosPJ.senha)
+            cy.ConfirmarSenha(dadosPJ.confirmandoSenha)
+            
+            cy.CriarConta()
+
+            cy.get(loc.mensagemEmailCpfRepetido).should('contain', 'E-mail ou CNPJ já cadastrado(s).')
+            cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
+        })
+
+        it('Deve verificar se o formato do email é valido', () => {
+
+            cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
+            cy.PreencherNome(dadosPJ.razaoSocial)
+            cy.PreencherInscricaoEst(dadosPJ.inscricaoEstadual)
+            cy.PreencherEmail(dadosPJInv.emailInvalido)
+            cy.PreencherDocumento(dadosPJ.cnpj)
+            cy.PreencherSenha(dadosPJ.senha)
+            cy.ConfirmarSenha(dadosPJ.confirmandoSenha)
+            
+            cy.CriarConta()
+
+            cy.xpath(loc.mensagemErroEmailInv).should('contain', 'E-mail inválido. Verifique se digitou corretamente.')
+            cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
+        })
+
         it('Deve verificar se o cnpj é obrigatório', () => {
-            cy.AcessarTelaDeCadastro()
             
             cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
             cy.PreencherNome(dadosPJ.razaoSocial)
@@ -129,8 +158,39 @@ describe('CadastroPJ', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
+        it('Deve verificar se o cnpj é valido', () => {
+            
+            cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
+            cy.PreencherNome(dadosPJ.razaoSocial)
+            cy.PreencherInscricaoEst(dadosPJ.inscricaoEstadual)
+            cy.PreencherDocumento('04.104.104/104')
+            cy.PreencherEmail(dadosPJ.email)
+            cy.PreencherSenha(dadosPJ.senha)
+            cy.ConfirmarSenha(dadosPJ.confirmandoSenha)
+            
+            cy.CriarConta()
+
+            cy.get(loc.mensagemEmailCpfRepetido).should('contain', 'E-mail ou CNPJ já cadastrado(s).')
+            cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
+        })
+
+        it('Deve verificar se o cnpj é repetido', () => {
+            
+            cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
+            cy.PreencherNome(dadosPJ.razaoSocial)
+            cy.PreencherInscricaoEst(dadosPJ.inscricaoEstadual)
+            cy.PreencherDocumento('84.936.341/1101-63')
+            cy.PreencherEmail(dadosPJ.email)
+            cy.PreencherSenha(dadosPJ.senha)
+            cy.ConfirmarSenha(dadosPJ.confirmandoSenha)
+            
+            cy.CriarConta()
+
+            cy.xpath(loc.mensagemDocumentoInv).should('contain', 'CPF/CNPJ inválido')
+            cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
+        })
+
         it('Deve verificar se a senha é obrigatório', () => {
-            cy.AcessarTelaDeCadastro()
             
             cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
             cy.PreencherNome(dadosPJ.razaoSocial)
@@ -145,8 +205,7 @@ describe('CadastroPJ', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar se a senha é obrigatório', () => {
-            cy.AcessarTelaDeCadastro()
+        it('Deve verificar se a confirmação de senha é obrigatório', () => {
             
             cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
             cy.PreencherNome(dadosPJ.razaoSocial)

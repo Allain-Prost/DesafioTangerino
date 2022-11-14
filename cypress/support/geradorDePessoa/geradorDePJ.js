@@ -1,7 +1,7 @@
 
 const faker = require('faker-br')
 
-const pessoasPF = [];
+const pessoasPJ = [];
 
 for (let i = 0; i < 5; i++) {
     const tipoPessoa = "1"
@@ -23,7 +23,7 @@ for (let i = 0; i < 5; i++) {
         confirmandoSenha
     }
 
-    pessoasPF.push(geradorDePessoaPJ)
+    pessoasPJ.push(geradorDePessoaPJ)
 }
 
-export default pessoasPF
+export default pessoasPJ

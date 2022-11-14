@@ -229,7 +229,7 @@ describe('CadastroPF', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar se o documento é valido', () => {
+        it('Deve verificar se o cpf é valido', () => {
             cy.AcessarTelaDeCadastro()
 
             cy.PreencherTipoPessoa(dadosPF.tipoPessoaPF)
@@ -248,7 +248,7 @@ describe('CadastroPF', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar documento repetido', () => {
+        it('Deve verificar cpf repetido', () => {
             cy.AcessarTelaDeCadastro()
 
             cy.PreencherTipoPessoa(dadosPF.tipoPessoaPF)
