@@ -3,7 +3,7 @@
 import loc from "../support/locators/locators"
 import dadosPF from "../fixtures/dadosPF.json"
 import dadosPFInv from "../fixtures/dadosPFInv.json"
-import PF from "../support/geradorDePessoa/geradorDeCPF"
+import PF from "../support/geradorDePessoa/geradorDePF"
 
 describe('CadastroPF', () => {
     
@@ -100,7 +100,7 @@ describe('CadastroPF', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar se o documento é obrigatório', () => {
+        it('Deve verificar se o cpf é obrigatório', () => {
             cy.AcessarTelaDeCadastro()
 
             cy.PreencherTipoPessoa(dadosPF.tipoPessoaPF)

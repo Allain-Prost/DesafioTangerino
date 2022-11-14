@@ -61,6 +61,10 @@ Cypress.Commands.add('PreencherDocumento', (documento) => {
     cy.get(loc.form_Cadastro.documento).type(documento)
 })
 
+Cypress.Commands.add('PreencherInscricaoEst', (insc) => {
+    cy.get(loc.form_Cadastro.inscricao).type(insc)
+})
+
 Cypress.Commands.add('CriarConta', () => {
     cy.get(loc.form_Cadastro.btn_criarConta).click()
 })

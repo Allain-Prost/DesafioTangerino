@@ -12,6 +12,7 @@ const locators = {
         email: '#RegistrationForm_email',
         genero: '#RegistrationForm_gender',
         documento: '#RegistrationForm_tax_identification',
+        inscricao: '#RegistrationForm_state_registration',
         
         dataDeNascimento: {
             dia: '#RegistrationForm_day',
@@ -30,8 +31,9 @@ const locators = {
     mensagemErroEmailInv: `//label[@for='RegistrationForm_email']/../ul/li[@class="parsley-type"]`,
     mensagemDocumentoInv: `//label[@for='RegistrationForm_tax_identification']/../div[@class="errorMessage"]`,
     mensagemEmailCpfRepetido: '.message-description',
+    mensagemErroInscricao: `//label[@for="RegistrationForm_state_registration"]/../ul/li[@class="parsley-required"]`, 
 
-    olaPessoa: '.header-login-welcome'   
+    olaPessoa: '.header-login-welcome'
 
 }
 
