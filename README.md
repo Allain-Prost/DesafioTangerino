@@ -14,16 +14,24 @@
     
 * Execução do projeto
 
-  1. Cada arquivo que está contido dentro da pasta "e2e" representa uma suite de testes, sendo assim, podemos
-     executar uma suite por vez, sendo necessário executar um arquivo específico, por exemplo o arquivo correspondente ao caminho abaixo: 
-     
-        ``` teste ``
 
-  2. Ou podemos executar todos os scripts de uma só vez, executando a class que se encontra no caminho abaixo:
+  1. Podemos executar o projeto acompanhando toda a execução vendo o passo a passo através do Dashboard do Cypress. Para isso é necessário executar o comando abaixo:
      
-     ``` teste ``` 
+        ``` npm run cypress:open ```
+        
+         Com isso, o Cypress vai abrir o DashBoard no qual você deve escolher a opção "e2e testing";
+  
+         Seleciona o navegador, de preferência os Chrome e clica no botão "Start E2E Testing in Chrome";
+  
+         Por fim, basta clicar em uma das suítes de testes, sendo elas: cadastroPF e cadastroPJ
+  
+  5. Ou podemos executar todos os scripts de uma só vez, executando o comando abaixo que se encontra no caminho abaixo:
      
-## Report de Bug e Casos de Testes
+     
+     ``` npm run cypress:ci ``` 
+     
+     
+## Casos de Testes e report
 
 * Report de bug: https://docs.google.com/document/d/1U7CzGeaxFWY7RdcpvKsUElA4PHkysK0ckVJ_mCVyw74/edit?usp=sharing
 
