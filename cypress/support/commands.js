@@ -101,3 +101,11 @@ Cypress.Commands.add('VerificarSeUsuarioEstaNaTelaDeCadastro', () => {
 Cypress.Commands.add('VerificarCadastroComSucesso', (nome) => {
     cy.get(loc.olaPessoa).should('contain', `${nome}`)
 })
+
+Cypress.Commands.add('MarcarIsento', ()=> {
+    cy.get(loc.form_Cadastro.isento).click()
+})
+
+Cypress.Commands.add('RemoverOfertas', () => {
+    cy.get(loc.form_Cadastro.ofertas).click()
+})

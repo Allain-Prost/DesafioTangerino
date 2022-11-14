@@ -5,23 +5,59 @@ import dadosPJ from "../fixtures/dadosPJ.json"
 import loc from "../support/locators/locators"
 
 describe('CadastroPJ', () => {
-    //912813941306 insc repetida
 
-    context('Fluxo básico', () => {
-        it('Deve realizar o cadastro com sucesso', () => {
+    context.only('Fluxo básico', () => {
+        beforeEach(() => {
             cy.AcessarTelaDeCadastro()
+        })
+
+        it('Deve realizar o cadastro com sucesso', () => {
             
-            cy.PreencherTipoPessoa(PJ.tipoPessoa)
-            cy.PreencherNome(PJ.razaoSocial)
-            cy.PreencherInscricaoEst(PJ.inscricaoEstadual)
-            cy.PreencherEmail(PJ.email)
-            cy.PreencherDocumento(PJ.cnpj)
-            cy.PreencherSenha(PJ.senha)
-            cy.ConfirmarSenha(PJ.confirmandoSenha)
+            cy.PreencherTipoPessoa(PJ[0].tipoPessoa)
+            cy.PreencherNome(PJ[0].razaoSocial)
+            cy.PreencherInscricaoEst(PJ[0].inscricaoEstadual)
+            cy.PreencherEmail(PJ[0].email)
+            cy.PreencherDocumento(PJ[0].cnpj)
+            cy.PreencherSenha(PJ[0].senha)
+            cy.ConfirmarSenha(PJ[0].confirmandoSenha)
             
             cy.CriarConta()
 
-            cy.VerificarCadastroComSucesso(PJ.razaoSocial)
+            cy.VerificarCadastroComSucesso(PJ[0].razaoSocial)
+
+        })
+
+        it('Deve realizar o cadastro com a inscrição estadual isento com sucesso', () => {
+            
+            
+            cy.PreencherTipoPessoa(PJ[1].tipoPessoa)
+            cy.PreencherNome(PJ[1].razaoSocial)
+            cy.MarcarIsento()
+            cy.PreencherEmail(PJ[1].email)
+            cy.PreencherDocumento(PJ[1].cnpj)
+            cy.PreencherSenha(PJ[1].senha)
+            cy.ConfirmarSenha(PJ[1].confirmandoSenha)
+            
+            cy.CriarConta()
+
+            cy.VerificarCadastroComSucesso(PJ[1].razaoSocial)
+
+        })
+
+        it('Deve realizar o cadastro sem receber descontos e ofertas por email e SMS com sucesso', () => {
+            
+            cy.PreencherTipoPessoa(PJ[2].tipoPessoa)
+            cy.PreencherNome(PJ[2].razaoSocial)
+            cy.PreencherInscricaoEst(PJ[2].inscricaoEstadual)
+            cy.PreencherEmail(PJ[2].email)
+            cy.PreencherDocumento(PJ[2].cnpj)
+            cy.PreencherSenha(PJ[2].senha)
+            cy.ConfirmarSenha(PJ[2].confirmandoSenha)
+            cy.RemoverOfertas()
+            
+            cy.CriarConta()
+
+            cy.VerificarCadastroComSucesso(PJ[2].razaoSocial)
 
         })
     })
@@ -124,7 +160,6 @@ describe('CadastroPJ', () => {
             cy.VerificarCampoObrigatorio('password2')
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
-
 
     })
 })

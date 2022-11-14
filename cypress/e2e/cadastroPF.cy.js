@@ -24,6 +24,26 @@ describe('CadastroPF', () => {
             cy.CriarConta()
             cy.VerificarCadastroComSucesso(PF.primeiroNome)
         })
+
+        it.only('Deve realizar o cadastro sem receber descontos e ofertas por email e SMS com sucesso', () => {
+            cy.AcessarTelaDeCadastro()
+            
+            cy.PreencherTipoPessoa(PF.tipoPessoaPF)
+            cy.PreencherNome(PF.primeiroNome)
+            cy.PreencherSobreNome(PF.sobreNome)
+            cy.PreencherEmail(PF.email)
+            cy.PreencherSexo(PF.sexo)
+            cy.PreencherDocumento(PF.cpf)
+            cy.PreencherDataNascimento(PF.nascimentoDia, PF.nascimentoMes, PF.nascimentoAno)
+            cy.PreencherSenha(PF.senha)
+            cy.ConfirmarSenha(PF.confirmandoSenha)
+            cy.RemoverOfertas()
+            
+            cy.CriarConta()
+
+            cy.VerificarCadastroComSucesso(PF.primeiroNome)
+
+        })
     })
 
     context('Fluxo exceção', () => {

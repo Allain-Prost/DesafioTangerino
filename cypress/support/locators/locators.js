@@ -13,6 +13,8 @@ const locators = {
         genero: '#RegistrationForm_gender',
         documento: '#RegistrationForm_tax_identification',
         inscricao: '#RegistrationForm_state_registration',
+        isento: '#RegistrationForm_state_registration_exempt',
+        ofertas: '#RegistrationForm_is_newsletter_subscribed',
         
         dataDeNascimento: {
             dia: '#RegistrationForm_day',
