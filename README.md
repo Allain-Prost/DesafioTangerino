@@ -39,4 +39,4 @@
      
 ## Casos de Testes e report
 
-* Report de bug: https://docs.google.com/document/d/1U7CzGeaxFWY7RdcpvKsUElA4PHkysK0ckVJ_mCVyw74/edit?usp=sharing
+* Report de bug: https://drive.google.com/file/d/1kPd-uQqlPFAN1_fa1nwGVahyjlthdzUd/view?usp=sharing
