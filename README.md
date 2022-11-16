@@ -37,6 +37,6 @@
      ``` npm run cypress:ci ``` 
      
      
-## Casos de Testes e report
+## Relatório de teste
 
-* Report de bug: https://drive.google.com/file/d/1kPd-uQqlPFAN1_fa1nwGVahyjlthdzUd/view?usp=sharing
+* Doc: https://drive.google.com/file/d/1kPd-uQqlPFAN1_fa1nwGVahyjlthdzUd/view?usp=sharing
