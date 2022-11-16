@@ -12,7 +12,7 @@ describe('CadastroPJ', () => {
 
     context('Fluxo básico', () => {
 
-        it('Deve realizar o cadastro com sucesso', () => {
+        it('01 - Deve realizar o cadastro com sucesso', () => {
             
             cy.PreencherTipoPessoa(PJ[0].tipoPessoa)
             cy.PreencherNome(PJ[0].razaoSocial)
@@ -28,7 +28,7 @@ describe('CadastroPJ', () => {
 
         })
 
-        it('Deve realizar o cadastro com a inscrição estadual isento com sucesso', () => {
+        it('02 - Deve realizar o cadastro com a inscrição estadual isento com sucesso', () => {
             
             cy.PreencherTipoPessoa(PJ[1].tipoPessoa)
             cy.PreencherNome(PJ[1].razaoSocial)
@@ -44,7 +44,7 @@ describe('CadastroPJ', () => {
 
         })
 
-        it('Deve realizar o cadastro sem receber descontos e ofertas por email e SMS com sucesso', () => {
+        it('03 - Deve realizar o cadastro sem receber descontos e ofertas por email e SMS com sucesso', () => {
             
             cy.PreencherTipoPessoa(PJ[2].tipoPessoa)
             cy.PreencherNome(PJ[2].razaoSocial)
@@ -64,7 +64,7 @@ describe('CadastroPJ', () => {
 
     context('Fluxo de exceção', () => {
 
-        it('Deve verificar se razão social é obrigatório', () => {
+        it('04 - Deve verificar se razão social é obrigatório', () => {
             
             cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
             cy.PreencherInscricaoEst(dadosPJ.inscricaoEstadual)
@@ -79,7 +79,7 @@ describe('CadastroPJ', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar se a inscrição estadual é obrigatório', () => {
+        it('05 - Deve verificar se a inscrição estadual é obrigatório', () => {
             
             cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
             cy.doubleClickIsento()
@@ -95,7 +95,7 @@ describe('CadastroPJ', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar se o email é obrigatório', () => {
+        it('06 - Deve verificar se o email é obrigatório', () => {
         
             cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
             cy.PreencherNome(dadosPJ.razaoSocial)
@@ -110,7 +110,7 @@ describe('CadastroPJ', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar email repetido', () => {
+        it('07 - Deve verificar email repetido', () => {
             
             cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
             cy.PreencherNome(dadosPJ.razaoSocial)
@@ -126,7 +126,7 @@ describe('CadastroPJ', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar se o formato do email é valido', () => {
+        it('08 - Deve verificar se o formato do email é valido', () => {
 
             cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
             cy.PreencherNome(dadosPJ.razaoSocial)
@@ -142,7 +142,7 @@ describe('CadastroPJ', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar se o cnpj é obrigatório', () => {
+        it('09 - Deve verificar se o cnpj é obrigatório', () => {
             
             cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
             cy.PreencherNome(dadosPJ.razaoSocial)
@@ -157,7 +157,7 @@ describe('CadastroPJ', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar se o cnpj é valido', () => {
+        it('10 - Deve verificar se o cnpj é valido', () => {
             
             cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
             cy.PreencherNome(dadosPJ.razaoSocial)
@@ -173,7 +173,7 @@ describe('CadastroPJ', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar se o cnpj é repetido', () => {
+        it('11 -Deve verificar se o cnpj é repetido', () => {
             
             cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
             cy.PreencherNome(dadosPJ.razaoSocial)
@@ -189,7 +189,7 @@ describe('CadastroPJ', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar se a senha é obrigatório', () => {
+        it('12 - Deve verificar se a senha é obrigatório', () => {
             
             cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
             cy.PreencherNome(dadosPJ.razaoSocial)
@@ -204,7 +204,7 @@ describe('CadastroPJ', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar se a confirmação de senha é obrigatório', () => {
+        it('13 - Deve verificar se a confirmação de senha é obrigatório', () => {
             
             cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
             cy.PreencherNome(dadosPJ.razaoSocial)
@@ -216,6 +216,21 @@ describe('CadastroPJ', () => {
             cy.CriarConta()
 
             cy.VerificarCampoObrigatorio('password2')
+            cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
+        })
+
+        it('14 - Deve verificar se a senha e confirmação de senha são idênticas', () => {
+            
+            cy.PreencherTipoPessoa(dadosPJ.tipoPessoa)
+            cy.PreencherNome(dadosPJ.razaoSocial)
+            cy.PreencherInscricaoEst(dadosPJ.inscricaoEstadual)
+            cy.PreencherDocumento(dadosPJ.cnpj)
+            cy.PreencherEmail(dadosPJ.email)
+            cy.PreencherSenha(dadosPJ.senha)
+            cy.ConfirmarSenha('123123asdas')
+            
+            cy.CriarConta()
+            cy.xpath(loc.mensagemErroSenhasIdentica).should('contain', 'Certifique-se de que as senhas informadas são idênticas')
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 

@@ -33,7 +33,9 @@ const locators = {
     mensagemErroEmailInv: `//label[@for='RegistrationForm_email']/../ul/li[@class="parsley-type"]`,
     mensagemDocumentoInv: `//label[@for='RegistrationForm_tax_identification']/../div[@class="errorMessage"]`,
     mensagemEmailCpfRepetido: '.message-description',
-    mensagemErroInscricao: `//label[@for="RegistrationForm_state_registration"]/../ul/li[@class="parsley-required"]`, 
+    mensagemErroInscricao: `//label[@for="RegistrationForm_state_registration"]/../ul/li[@class="parsley-required"]`,
+    mensagemErroSenhasIdentica: `//label[@for='RegistrationForm_password2']/../ul/li[@class="parsley-equalto"]`, 
+
 
     olaPessoa: '.header-login-welcome'
 

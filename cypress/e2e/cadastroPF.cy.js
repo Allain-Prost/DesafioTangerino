@@ -11,7 +11,7 @@ describe('CadastroPF', () => {
     })
     
     context('Fluxo básico', () => {
-        it('Deve realizar o cadastro com sucesso', () => {
+        it('01 - Deve realizar o cadastro com sucesso', () => {
             
             cy.PreencherTipoPessoa(PF[0].tipoPessoaPF)
             cy.PreencherNome(PF[0].primeiroNome)
@@ -27,7 +27,7 @@ describe('CadastroPF', () => {
             cy.VerificarCadastroComSucesso(PF[0].primeiroNome)
         })
 
-        it('Deve realizar o cadastro sem receber descontos e ofertas por email e SMS com sucesso', () => {
+        it('02 - Deve realizar o cadastro sem receber descontos e ofertas por email e SMS com sucesso', () => {
             
             cy.PreencherTipoPessoa(PF[1].tipoPessoaPF)
             cy.PreencherNome(PF[1].primeiroNome)
@@ -49,7 +49,7 @@ describe('CadastroPF', () => {
 
     context('Fluxo exceção', () => {
 
-        it('Deve verificar se o primeiro nome é obrigatório', () => {
+        it('03 - Deve verificar se o nome é obrigatório', () => {
             
             cy.PreencherTipoPessoa(dadosPF.tipoPessoaPF)
             cy.PreencherSobreNome(dadosPF.sobreNome)
@@ -66,7 +66,7 @@ describe('CadastroPF', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar se o sobrenome é obrigatório', () => {
+        it('04 - Deve verificar se o sobrenome é obrigatório', () => {
 
             cy.PreencherTipoPessoa(dadosPF.tipoPessoaPF)
             cy.PreencherNome(dadosPF.primeiroNome)
@@ -83,7 +83,7 @@ describe('CadastroPF', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar se o email é obrigatório', () => {
+        it('05 - Deve verificar se o email é obrigatório', () => {
 
             cy.PreencherTipoPessoa(dadosPF.tipoPessoaPF)
             cy.PreencherNome(dadosPF.primeiroNome)
@@ -100,7 +100,7 @@ describe('CadastroPF', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar se o sexo é obrigatório', () => {
+        it('06 - Deve verificar se o sexo é obrigatório', () => {
 
             cy.PreencherTipoPessoa(dadosPF.tipoPessoaPF)
             cy.PreencherNome(dadosPF.primeiroNome)
@@ -117,7 +117,7 @@ describe('CadastroPF', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar se o cpf é obrigatório', () => {
+        it('07 - Deve verificar se o cpf é obrigatório', () => {
 
             cy.PreencherTipoPessoa(dadosPF.tipoPessoaPF)
             cy.PreencherNome(dadosPF.primeiroNome)
@@ -134,7 +134,7 @@ describe('CadastroPF', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar se a data de nascimento é obrigatório', () => {
+        it('08- Deve verificar se a data de nascimento é obrigatório', () => {
 
             cy.PreencherTipoPessoa(dadosPF.tipoPessoaPF)
             cy.PreencherNome(dadosPF.primeiroNome)
@@ -150,7 +150,7 @@ describe('CadastroPF', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar se a senha é obrigatório', () => {
+        it('09 - Deve verificar se a senha é obrigatório', () => {
 
             cy.PreencherTipoPessoa(dadosPF.tipoPessoaPF)
             cy.PreencherNome(dadosPF.primeiroNome)
@@ -167,7 +167,7 @@ describe('CadastroPF', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar se a repetição de senha é obrigatório', () => {
+        it('10 - Deve verificar se a repetição de senha é obrigatório', () => {
 
             cy.PreencherTipoPessoa(dadosPF.tipoPessoaPF)
             cy.PreencherNome(dadosPF.primeiroNome)
@@ -184,7 +184,24 @@ describe('CadastroPF', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar se o formato do email é valido', () => {
+        it('11 - Deve verificar se a senha e confirmação de senha são idênticas', () => {
+            
+            cy.PreencherTipoPessoa(dadosPF.tipoPessoaPF)
+            cy.PreencherNome(dadosPF.primeiroNome)
+            cy.PreencherSobreNome(dadosPF.sobreNome)
+            cy.PreencherEmail(dadosPF.email)
+            cy.PreencherSexo(dadosPF.sexo)
+            cy.PreencherDocumento(dadosPF.documento)
+            cy.PreencherDataNascimento(dadosPF.nascimento.dia, dadosPF.nascimento.mes, dadosPF.nascimento.ano)
+            cy.PreencherSenha(dadosPF.senha)
+            cy.ConfirmarSenha('123123asdas')
+            
+            cy.CriarConta()
+            cy.xpath(loc.mensagemErroSenhasIdentica).should('contain', 'Certifique-se de que as senhas informadas são idênticas')
+            cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
+        })
+
+        it('12 - Deve verificar se o formato do email é valido', () => {
 
             cy.PreencherTipoPessoa(dadosPF.tipoPessoaPF)
             cy.PreencherNome(dadosPF.primeiroNome)
@@ -202,7 +219,7 @@ describe('CadastroPF', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar email repetido', () => {
+        it('13 - Deve verificar email repetido', () => {
 
             cy.PreencherTipoPessoa(dadosPF.tipoPessoaPF)
             cy.PreencherNome(dadosPF.primeiroNome)
@@ -220,7 +237,7 @@ describe('CadastroPF', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar se o cpf é valido', () => {
+        it('14 - Deve verificar se o cpf é valido', () => {
 
             cy.PreencherTipoPessoa(dadosPF.tipoPessoaPF)
             cy.PreencherNome(dadosPF.primeiroNome)
@@ -238,7 +255,7 @@ describe('CadastroPF', () => {
             cy.VerificarSeUsuarioEstaNaTelaDeCadastro()
         })
 
-        it('Deve verificar cpf repetido', () => {
+        it('15 - Deve verificar cpf repetido', () => {
 
             cy.PreencherTipoPessoa(dadosPF.tipoPessoaPF)
             cy.PreencherNome(dadosPF.primeiroNome)
